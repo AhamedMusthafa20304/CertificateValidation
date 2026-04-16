@@ -85,8 +85,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
   };
 
   const generateFinalPDF = async (cert: StudentCertificate, download = false) => {
+    const API_URL = "https://certificatevalidation-2.onrender.com";
     try {
-      const response = await fetch('/api/generate-certificate', {
+      const response = await fetch('${API_URL}/api/generate-certificate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

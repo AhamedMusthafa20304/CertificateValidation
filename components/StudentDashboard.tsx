@@ -53,9 +53,10 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ user }) => {
   };
 
   const generatePDF = async (cert: StudentCertificate) => {
+    const API_URL = "https://certificatevalidation-2.onrender.com";
     setIsGeneratingPdf(true);
     try {
-      const response = await fetch('/api/generate-certificate', {
+      const response = await fetch('${API_URL}/api/generate-certificate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ studentName: cert.studentName, course: cert.course, issuerName: cert.issuerName, certificateHash: cert.certificateHash, templateBase64: cert.templateImage, qrConfig: cert.qrConfig }),
