@@ -1,5 +1,5 @@
 import express from 'express';
-import { createServer as createViteServer } from 'vite';
+
 import PDFKitDocument from 'pdfkit';
 import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 import QRCode from 'qrcode';
@@ -117,23 +117,15 @@ async function startServer() {
   });
 
   // Vite middleware for development
-  if (!isProduction) {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else {
+ 
     app.use(express.static(path.join(__dirname, 'dist')));
     app.get('/*', (req, res) => {
       res.sendFile(path.join(__dirname, 'dist', 'index.html'));
     });
-  }
 
   app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
 }
 
 startServer();
